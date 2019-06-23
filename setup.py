@@ -63,7 +63,7 @@ if 'bdist_wheel' in sys.argv or 'install' in sys.argv:
         subprocess.check_output(["make", "-j2", "-C", my_path + "qnn/src/network/", "lib_sw_W1A2"])
         subprocess.check_output(["make", "-j2", "-C", my_path + "qnn/src/network/", "lib_sw_W1A3"])
         shutil.copy2(my_path + "qnn/src/network/output/lib_sw_W1A2.so", my_path + "qnn/libraries/")
-#        shutil.copy2(my_path + "qnn/src/network/output/lib_sw_W1A3.so", my_path + "qnn/libraries/")
+        shutil.copy2(my_path + "qnn/src/network/output/lib_sw_W1A3.so", my_path + "qnn/libraries/")
 
     for root, dirs, files in os.walk(my_path + "qnn/"):
         for file in files:
