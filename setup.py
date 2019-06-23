@@ -34,12 +34,12 @@ import shutil
 import os
 from glob import glob
 
-if os.environ['BOARD'] != 'Ultra96' and os.environ['BOARD'] != 'Pynq-Z1' and os.environ['BOARD'] != 'Pynq-Z2':
+if os.environ['BOARD'] != 'ZCU104' and os.environ['BOARD'] != 'Pynq-Z1' and os.environ['BOARD'] != 'Pynq-Z2':
 	print("Only supported on a Ultra96, Pynq-Z1 or Pynq-Z2 Board")
 	exit(1)
 
-if os.environ['BOARD'] == 'Ultra96':
-	PLATFORM="ultra96"
+if os.environ['BOARD'] == 'ZCU104':
+	PLATFORM="ZCU104"
 elif os.environ['BOARD'] == 'Pynq-Z1' or os.environ['BOARD'] == 'Pynq-Z2':
 	PLATFORM="pynqZ1-Z2"
 else:
