@@ -43,26 +43,26 @@ if os.environ['BOARD'] == 'ZCU104':
 elif os.environ['BOARD'] == 'Pynq-Z1' or os.environ['BOARD'] == 'Pynq-Z2':
 	PLATFORM="pynqZ1-Z2"
 else:
-	raise RuntimeError("Board not supported")  
-	
+	raise RuntimeError("Board not supported")
+
 package_data = []
 data_files = []
 package_include_data = [ 'bitstreams/', 'params/', 'libraries/' ]
 
 if 'bdist_wheel' in sys.argv or 'install' in sys.argv:
     print("Running pre installation script...")
-    my_path = os.path.dirname(os.path.abspath(__file__)) + "/"  
+    my_path = os.path.dirname(os.path.abspath(__file__)) + "/"
     print("Building hardware library...")
     subprocess.check_output(["make", "-j2", "-C", my_path + "qnn/src/network/", "lib_hw"])
     shutil.copy2(my_path + "qnn/src/network/output/lib_hw.so", my_path + "qnn/libraries/"+PLATFORM)
 
-#    if os.environ.get('VIVADOHLS_INCLUDE_PATH') is not None:
-#        print("Building software libraries...")
-#        os.remove(my_path + "qnn/libraries/lib_sw_W1A2.so")
-#        os.remove(my_path + "qnn/libraries/lib_sw_W1A3.so")
-#        subprocess.check_output(["make", "-j2", "-C", my_path + "qnn/src/network/", "lib_sw_W1A2"])
-#        subprocess.check_output(["make", "-j2", "-C", my_path + "qnn/src/network/", "lib_sw_W1A3"])
-#        shutil.copy2(my_path + "qnn/src/network/output/lib_sw_W1A2.so", my_path + "qnn/libraries/")
+    if os.environ.get('VIVADOHLS_INCLUDE_PATH') is not None:
+        print("Building software libraries...")
+        os.remove(my_path + "qnn/libraries/lib_sw_W1A2.so")
+        os.remove(my_path + "qnn/libraries/lib_sw_W1A3.so")
+        subprocess.check_output(["make", "-j2", "-C", my_path + "qnn/src/network/", "lib_sw_W1A2"])
+        subprocess.check_output(["make", "-j2", "-C", my_path + "qnn/src/network/", "lib_sw_W1A3"])
+        shutil.copy2(my_path + "qnn/src/network/output/lib_sw_W1A2.so", my_path + "qnn/libraries/")
 #        shutil.copy2(my_path + "qnn/src/network/output/lib_sw_W1A3.so", my_path + "qnn/libraries/")
 
     for root, dirs, files in os.walk(my_path + "qnn/"):
@@ -112,4 +112,4 @@ if 'bdist_wheel' in sys.argv or 'install' in sys.argv:
     if os.path.isdir("/opt/darknet"):
         shutil.rmtree("/opt/darknet")
     shutil.copytree("darknet/","/opt/darknet/")
-	
+
